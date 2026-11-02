@@ -6,7 +6,7 @@ Nuansiq gives an existing AI agent a working method for human-centered judgement
 
 **Use it three ways.** As a [native Agent Skill](#installing-as-a-native-skill-host-specific), as a [manual instruction file](#manual-instruction-fallback-no-native-skills) for hosts without skill support, or as [programmatic context](#developer-integration-programmatic-context) in your own app. The behavioural guidance is the same in all three; only the delivery differs.
 
-**Example (an illustration, not an observed result).** In a host where the skill is installed and invoked by name:
+**Example (an illustration, not an observed result).** Shown with a slash command because that is one host's documented route; other hosts use their own. In a host where the skill is installed and invoked by name:
 
 ```text
 /nuansiq review this onboarding email for warehouse staff; it currently reads like a press release.
