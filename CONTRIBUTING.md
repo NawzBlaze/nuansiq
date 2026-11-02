@@ -24,6 +24,21 @@ Nuansiq is deliberately small. The useful contribution is usually a sharper inst
 - Telemetry, analytics, network calls, dependencies, backends, dashboards, or installers.
 - A second skill that overlaps with `nuansiq` without a clear reason to be separate.
 
+## Portability and the generated manual
+
+The behavioural guidance must work anywhere text can be sent to a model, so the skill package stays vendor-neutral.
+
+- Do **not** put host names, product names, slash-command syntax, tool names, or filesystem paths inside `skills/nuansiq/`. Those belong in the README's host-specific installation section. `scripts/validate.py` fails if it finds them.
+- Do **not** maintain a second copy of the guidance. `standalone/nuansiq-manual.md` is generated from `skills/nuansiq/` and must never be edited by hand.
+- After any change under `skills/nuansiq/`, run the build and commit both:
+
+```bash
+python3 scripts/build_standalone.py
+python3 scripts/build_standalone.py --check
+```
+
+The check regenerates in memory and compares bytes; CI runs it as its own step, so a stale copy fails the build. If the generator refuses a change (for example a new link target it cannot rewrite), fix the generator or the source — do not patch the output.
+
 ## Editorial standards
 
 1. **Concrete over abstract.** "Name the cost once, with a consequence" beats "be thoughtful about preferences".
@@ -69,6 +84,8 @@ Each case in [`evals/`](evals/README.md) is a brief plus criteria, not a golden 
 - [ ] `SKILL.md` still answers the question "what would an agent get wrong without this?" for every paragraph.
 - [ ] Any new link, path, or command was actually opened or run.
 - [ ] No new dependency, network call, or storage.
+- [ ] If `skills/nuansiq/` changed, the standalone file was rebuilt and is committed.
+- [ ] No host, vendor, tool, or slash-command specifics were added to the skill package.
 - [ ] Behaviour changes are described in the pull request body, including what you tested manually.
 
 ## Licensing

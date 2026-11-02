@@ -26,13 +26,13 @@ Answer those directly and briefly. Applying ceremony to a small request is itsel
 
 ## Load only the reference you need
 
-| File | Read it when |
+| Reference | Read it when |
 | --- | --- |
 | [references/judgement.md](references/judgement.md) | You must choose an approach, weigh competing tastes, handle a stated user preference, or decide how much to say. |
 | [references/research.md](references/research.md) | Facts, dates, versions, or external references could change the answer, or the task assumes a tool you do not have. |
 | [references/critique.md](references/critique.md) | You are reviewing or revising a draft, your own or the user's. |
 
-Read one, not all three. They are detailed on purpose; this file is the part that always applies.
+Read one, not all three. They are detailed on purpose; the core instructions above are the part that always applies.
 
 ## The loop
 

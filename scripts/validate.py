@@ -20,6 +20,7 @@ Exit code is 1 if any errors are found.
 from __future__ import annotations
 
 import re
+import subprocess
 import sys
 from pathlib import Path
 
@@ -70,12 +71,36 @@ FAKE_INSTALLS = [
     "gem install nuan" + "siq",
 ]
 
+# Host, vendor, and syntax specifics belong in installation docs, not in the
+# skill package: the core guidance must stay model-agnostic.
+VENDOR_TOKENS = [
+    "claude",
+    "codex",
+    "copilot",
+    "openai",
+    "anthropic",
+    "gemini",
+    "gpt",
+    "llama",
+    "mistral",
+    "qwen",
+    ".claude",
+    ".agents",
+    "/nuansiq",
+    "$nuansiq",
+    "web_search",
+    "read_file",
+]
+
 REQUIRED_README_SECTIONS = [
     "What it is",
     "What it does not do",
-    "Who it is for",
-    "Installation",
-    "How to invoke",
+    "Three ways to use",
+    "native skill",
+    "Manual instruction fallback",
+    "Developer integration",
+    "Capability matrix",
+    "Evaluating it",
     "Known limitations",
     "License",
 ]
@@ -310,6 +335,41 @@ def detect_license_family(text: str) -> str | None:
     return None
 
 
+def check_vendor_neutral_core() -> None:
+    """The skill package must not depend on a host, vendor, or tool naming."""
+    skills_dir = ROOT / "skills"
+    if not skills_dir.exists():
+        return
+    for path in sorted(skills_dir.rglob("*.md")):
+        lowered = path.read_text(encoding="utf-8").lower()
+        hits = sorted(token for token in VENDOR_TOKENS if token in lowered)
+        if hits:
+            error(
+                f"{rel(path)}: core guidance contains host or vendor specifics "
+                f"({', '.join(hits)}); keep them in the installation docs instead"
+            )
+
+
+def check_standalone() -> None:
+    """The standalone manual must be a fresh build of the canonical sources."""
+    script = ROOT / "scripts" / "build_standalone.py"
+    output = ROOT / "standalone" / "nuansiq-manual.md"
+    if not script.exists():
+        error("scripts/build_standalone.py is missing")
+        return
+    if not output.exists():
+        error("standalone/nuansiq-manual.md is missing; run python3 scripts/build_standalone.py")
+        return
+
+    result = subprocess.run(
+        [sys.executable, str(script), "--check"], capture_output=True, text=True
+    )
+    if result.returncode != 0:
+        message = (result.stderr or result.stdout).strip().splitlines()
+        detail = message[0] if message else "run python3 scripts/build_standalone.py"
+        error(f"standalone instructions are out of date: {detail}")
+
+
 def check_license_status() -> None:
     candidates = ["LICENSE", "LICENSE.md", "LICENSE.txt", "COPYING"]
     license_path = next((ROOT / name for name in candidates if (ROOT / name).exists()), None)
@@ -355,6 +415,8 @@ def main() -> int:
     check_markdown()
     check_readme()
     check_license_status()
+    check_vendor_neutral_core()
+    check_standalone()
 
     for message in warnings:
         print(f"warning: {message}")

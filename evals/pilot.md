@@ -27,7 +27,7 @@ Self-scoring is not independent evidence. Where possible, have a second person s
 - A clean way to toggle the skill: install it for condition B, remove it for condition A. Do not leave a second copy in another skills directory.
 - The skill content pinned to a commit (`git rev-parse HEAD`) and recorded.
 
-A step-by-step version of this in a single host, including installation and activation checks, is in [manual-test-claude-code.md](manual-test-claude-code.md).
+A step-by-step version of this in a single host, including installation and activation checks, is in [manual-test-claude-code.md](manual-test-claude-code.md). To extend the same briefs across model families, use [cross-model-plan.md](cross-model-plan.md); this pilot stays single-host and single-model so the two are not confused.
 
 ## The five cases
 

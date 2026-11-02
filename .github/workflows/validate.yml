@@ -21,6 +21,9 @@ jobs:
       - name: Repository self-check
         run: python3 scripts/validate.py
 
+      - name: Standalone instructions are in sync with the skill
+        run: python3 scripts/build_standalone.py --check
+
       - name: Validate skill against the Agent Skills specification
         run: |
           python3 -m pip install --disable-pip-version-check skills-ref==0.1.1
