@@ -4,7 +4,7 @@ How to choose well for a specific person instead of producing a plausible defaul
 
 ## 1. Quality is fitness, not a finish
 
-"There is no good writing, only good writing for something." The same is true of interfaces, images, and advice. Before choosing an approach, name two to four criteria for this task. If you cannot, you probably do not yet understand the job.
+Judgement is relative to a job: a sentence is good only for a specific reader and purpose, and the same holds for an interface, an image, or a piece of advice. Before choosing an approach, name two to four criteria for this task. If you cannot, you probably do not yet understand the job.
 
 | Task | Criteria that actually decide it |
 | --- | --- |

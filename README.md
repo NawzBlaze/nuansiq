@@ -1,6 +1,6 @@
 # Nuansiq
 
-An open agent skill for human-centered judgement: the part of the work that is not "sound more human", but "make a choice that fits these people, this purpose, and these constraints".
+A portable agent skill for human-centered judgement: the part of the work that is not "sound more human", but "make a choice that fits these people, this purpose, and these constraints".
 
 Nuansiq is a **skill package for existing AI agents**, not a model, a chatbot, or an agent framework. It gives an agent a working method for understanding intent, choosing approaches deliberately, researching when facts matter, reviewing concretely, and revising before handing work over.
 
@@ -43,6 +43,7 @@ skills/
 examples/                       # four illustrative cross-domain walkthroughs
 evals/                          # seven task briefs with criteria and failure modes
 scripts/validate.py             # repository self-check, standard library only
+.github/workflows/validate.yml  # runs the checks on pushes and pull requests
 ```
 
 ## Installation

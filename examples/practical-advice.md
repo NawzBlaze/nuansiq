@@ -26,7 +26,7 @@ Answer:
 > 2. The call starts with one question: "what needs the group?" Anyone with a blocker gets 3 minutes; anything longer becomes a named pair after the call.
 > 3. A visible timer, and a parking lot written in the channel as people are cut off. The organizer owns ending on time, including mid-sentence.
 >
-> Why this is the smallest sufficient change: 8 people × 40 minutes is roughly 5.3 person-hours a day, and most of that is information one person needs and seven do not. Written status costs about 10 minutes per person per day, so the trade is close to neutral in total time and gives everyone their morning block back.
+> Why this is the smallest sufficient change: 8 people × 40 minutes is roughly 5.3 person-hours a day, and most of that is information one person needs and seven do not. Written status costs about 10 minutes per person per day, so the trade returns roughly four of those five hours and gives everyone their morning block back.
 >
 > Two failure modes to watch. First, written status rots into copy-pasted "still working on it" within two weeks; the fix is that the call's first question references the posts, so vague ones get asked about. Second, capping at 15 can kill the side conversations people valued. Keep one 15-minute optional "after" slot twice a week for whoever wants to stay, rather than letting the main call expand.
 

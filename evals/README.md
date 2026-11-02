@@ -50,6 +50,26 @@ Notes: cited the official support table and named the end-of-support date;
       correctly refused to state a date it could not confirm in the second run.
 ```
 
+## Testing activation separately
+
+The cases above assume the skill loaded. Whether it loads at all is decided by the `description`, which is the only part a host sees at startup. Test that separately, in a fresh session per prompt, and record whether the skill activated and why you think it did or did not.
+
+Prompts that should activate it:
+
+- "Rewrite this onboarding email for new warehouse staff; it currently reads like a press release."
+- "Give me two art directions for this poster, and tell me which you'd pick."
+- "Is this advice right for a five-person team with no ops budget?"
+- "Review my landing page copy before I send it to the client."
+- "Help me brief an illustrator for a magazine cover about drought."
+
+Prompts that should not:
+
+- "Convert this JSON to CSV." 
+- "What's the capital of Mongolia?"
+- "Add a docstring to this function."
+
+False positives (activating on mechanical work) are the more damaging failure, because they add ceremony to tasks that need none. If you see one, the description's exclusion sentence is the place to fix it, not the body.
+
 ## Known weaknesses of this set
 
 - Seven cases cannot cover the space; they catch specific, known failures.
