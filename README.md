@@ -1,10 +1,28 @@
 # Nuansiq
 
-A portable agent skill for human-centered judgement: the part of the work that is not "sound more human", but "make a choice that fits these people, this purpose, and these constraints".
+Nuansiq gives an existing AI agent a working method for human-centered judgement: clarify the job and its audience, choose an approach deliberately, research when facts could change the answer, and critique concrete problems before handing work over.
 
-Nuansiq is a **skill package for existing AI agents**, not a model, a chatbot, or an agent framework. It gives an agent a working method for understanding intent, choosing approaches deliberately, researching when facts matter, reviewing concretely, and revising before handing work over.
+**Preview status.** v0.1.0, one skill. This work is on the branch `arena/05108cd1-nuansiq`; the default branch `main` does not contain it, and there is no release. Licensed MIT (see [License](#license)).
 
-**Status:** v0.1.0 preview, pre-1.0, one skill. The work is on the branch `arena/05108cd1-nuansiq`; the default branch `main` does not contain it yet. **No license has been selected** (see [License](#license)).
+**Install (Claude Code, personal), from the preview branch:**
+
+```bash
+git clone --branch arena/05108cd1-nuansiq https://github.com/NawzBlaze/nuansiq.git
+cd nuansiq
+mkdir -p ~/.claude/skills && cp -R skills/nuansiq ~/.claude/skills/
+```
+
+Codex and VS Code Copilot paths, and why the branch matters: [Installation](#installation-status-preview-branch-not-on-main).
+
+**Example invocation — an illustration, not an observed result:**
+
+```text
+/nuansiq review this onboarding email for warehouse staff; it currently reads like a press release.
+```
+
+The shape being aimed at: a note on who the email is actually for, a rewritten draft at the requested length, one concrete tradeoff named, and no closing offer to keep going. Nobody has run this in a host and recorded the output.
+
+**Testing status.** The skill is format-valid, and was copied to all four documented host paths with its frontmatter revalidated there. Activation and task behaviour are untested in every host, and the [behavioural pilot](evals/pilot.md) has **not been run**. A step-by-step check for Claude Code is in [evals/manual-test-claude-code.md](evals/manual-test-claude-code.md).
 
 ## What it is
 
@@ -35,6 +53,7 @@ On the branch `arena/05108cd1-nuansiq`:
 ```
 README.md
 CONTRIBUTING.md
+LICENSE                         # MIT, copyright 2026 NawzBlaze
 skills/
   nuansiq/
     SKILL.md                    # name, description, and the core loop
@@ -45,6 +64,7 @@ skills/
 examples/                       # four illustrative cross-domain walkthroughs
 evals/                          # seven task briefs with criteria and failure modes
   pilot.md                      # five-case pilot procedure (status: not run)
+  manual-test-claude-code.md    # step-by-step check in one host
 scripts/validate.py             # repository self-check, standard library only
 .github/workflows/validate.yml  # runs the checks on pushes and pull requests
 ```
@@ -221,9 +241,11 @@ See [CONTRIBUTING.md](CONTRIBUTING.md). Contributions that add unverifiable clai
 
 ## License
 
-**No license has been selected for this repository.** There is no `LICENSE` file. Under default copyright, all rights are reserved: you may read the code and the text, but you do not currently have permission to reuse, modify, or redistribute it.
+MIT. See [LICENSE](LICENSE). Copyright (c) 2026 NawzBlaze.
 
-The owner needs to choose a license before Nuansiq is described as open source, and before outside contributions can be accepted with clear terms. A recommendation is included in [CONTRIBUTING.md](CONTRIBUTING.md#licensing) rather than applied silently.
+You may use, modify, and redistribute Nuansiq, including commercially, provided the copyright notice and permission notice are retained. The software is provided without warranty of any kind.
+
+**Third-party material.** Apart from the standard MIT licence text, the repository contains no vendored code, no images or fonts, no passages copied from other projects, and no distributed dependencies; the skill text, references, examples, and eval briefs were written for this project. The `skills-ref` package and the GitHub Actions used by CI are development tools, not part of the distributed skill. The `fastyaml-lite` package in one eval fixture is invented, and the documentation links in [References](#references) are cited, not reproduced. No separate notices are required on that basis. If you believe something here is unaccounted for, open an issue and it will be corrected or removed.
 
 ## References
 

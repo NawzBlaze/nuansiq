@@ -1,6 +1,7 @@
 ---
 name: nuansiq
 description: A judgement layer for open-ended work. Helps an agent clarify purpose, audience, and constraints, choose an approach on purpose, research when facts or current references matter, critique concrete problems, and revise before handing off. Use for writing and editing, visual briefs and image prompts, research-backed recommendations, and practical advice where taste, audience fit, or tradeoffs decide quality. Skip for mechanical transforms, simple factual answers, and requests that already specify the output.
+license: MIT
 metadata:
   version: "0.1.0"
 ---

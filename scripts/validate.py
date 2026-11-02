@@ -295,20 +295,51 @@ def check_readme() -> None:
         warn("README.md: contains an insecure http:// link")
 
 
-def check_license_status() -> None:
-    has_license_file = any(
-        (ROOT / name).exists() for name in ("LICENSE", "LICENSE.md", "LICENSE.txt", "COPYING")
-    )
-    readme = ROOT / "README.md"
-    mentions_no_license = False
-    if readme.exists():
-        text = readme.read_text(encoding="utf-8").lower()
-        mentions_no_license = "no license has been selected" in text
+def detect_license_family(text: str) -> str | None:
+    """Return the licence family named by a LICENSE file, if recognisable."""
+    families = {
+        "MIT": "MIT License",
+        "Apache-2.0": "Apache License",
+        "BSD-3-Clause": "BSD 3-Clause",
+        "BSD-2-Clause": "BSD 2-Clause",
+        "GPL-3.0": "GNU GENERAL PUBLIC LICENSE",
+    }
+    for family, marker in families.items():
+        if marker in text:
+            return family
+    return None
 
-    if has_license_file and mentions_no_license:
-        warn("README says no license is selected, but a license file exists; update the README")
-    if not has_license_file and not mentions_no_license:
-        warn("No license file and the README does not state that none has been selected")
+
+def check_license_status() -> None:
+    candidates = ["LICENSE", "LICENSE.md", "LICENSE.txt", "COPYING"]
+    license_path = next((ROOT / name for name in candidates if (ROOT / name).exists()), None)
+
+    readme = ROOT / "README.md"
+    readme_text = readme.read_text(encoding="utf-8") if readme.exists() else ""
+    lowered = readme_text.lower()
+
+    if license_path is None:
+        if "no license has been selected" not in lowered:
+            warn(
+                "No license file and the README does not state that none has been selected; "
+                "the project must not be described as open source"
+            )
+        return
+
+    text = license_path.read_text(encoding="utf-8")
+    family = detect_license_family(text)
+    if family is None:
+        warn(f"{license_path.name}: licence family not recognised; check it is a complete licence text")
+    elif family.lower() not in lowered:
+        warn(
+            f"{license_path.name} is {family}, but README.md does not mention it; "
+            "keep the licensing statements consistent"
+        )
+
+    if "copyright" not in text.lower():
+        warn(f"{license_path.name}: no copyright line found")
+    if "no license has been selected" in lowered:
+        warn("README.md still says no licence is selected, but a licence file exists")
 
 
 def main() -> int:

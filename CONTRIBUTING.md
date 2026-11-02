@@ -73,6 +73,13 @@ Each case in [`evals/`](evals/README.md) is a brief plus criteria, not a golden 
 
 ## Licensing
 
-There is currently no `LICENSE` file, so contributions have no settled terms. The maintainer should resolve this before accepting substantial contributions.
+Nuansiq is licensed under the **MIT License**; see [LICENSE](LICENSE). Copyright (c) 2026 NawzBlaze. The owner selected MIT on 2026-11-02.
 
-A recommendation for the owner, not yet applied: **MIT** if the goal is maximum adoption and minimal friction, or **Apache-2.0** if a patent grant and explicit contribution terms matter more than brevity. Both are compatible with the rest of this project's design, which has no dependencies and no runtime. Do not add a license file in a pull request unless the owner has stated a decision in an issue.
+Contributions are accepted under the same MIT terms (inbound = outbound). There is no CLA and no copyright assignment. By opening a pull request you confirm that:
+
+- you wrote the contribution, or it comes from material whose licence permits inclusion under MIT;
+- you have not copied text, code, images, or fonts from a source that requires an attribution you have not supplied.
+
+That is the project's convention for contributions, not a substitute for legal advice. If you are contributing on behalf of an employer, check that you are permitted to.
+
+Third-party material is audited in the README's [License](README.md#license) section. Do not add or change a licence file in a pull request; that is an owner decision, and it is currently settled.
