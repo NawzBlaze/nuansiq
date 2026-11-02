@@ -1,0 +1,30 @@
+name: validate
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  repository-check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Repository self-check
+        run: python3 scripts/validate.py
+
+      - name: Standalone instructions are in sync with the skill
+        run: python3 scripts/build_standalone.py --check
+
+      - name: Validate skill against the Agent Skills specification
+        run: |
+          python3 -m pip install --disable-pip-version-check skills-ref==0.1.1
+          agentskills validate skills/nuansiq
