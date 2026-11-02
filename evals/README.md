@@ -4,6 +4,8 @@ Seven task briefs for checking whether Nuansiq changes behaviour in the ways it 
 
 This directory is a **protocol, not a result**. No measured comparison is published in this repository, and none is claimed.
 
+The companion [pilot procedure](pilot.md) selects five of these cases for a baseline-versus-Nuansiq comparison and records what to capture. Its status is **not run**: no skill-capable host, model credentials, or model API access were available where this repository was prepared.
+
 ## Why these seven
 
 | Case | What it tests | Why it is here |

@@ -12,8 +12,8 @@ Nuansiq is deliberately small. The useful contribution is usually a sharper inst
 
 - **Eval cases** that expose a failure mode the current set misses, with the criteria and the failure written down.
 - **Examples** that show a real, specific choice being made, including ones where the right answer was restraint.
-- **Instruction fixes**: places where the skill is vague, contradictory, too long, or activates on the wrong requests.
-- **Host reports**: "I installed it in X on date Y, it loaded/ did not load." Evidence about real hosts is more useful than speculation.
+- **Instruction fixes**: places where the skill is vague, contradictory, too long, or likely to match the wrong requests.
+- **Host reports**: "I installed it in X on date Y, it loaded / did not load, and here is what the output did." The repository currently contains no such reports; evidence from real hosts is more useful than speculation, and is the only way the compatibility table in the README can gain a "tested" column.
 - **Cuts.** Removing a paragraph that does not change behaviour is a good pull request.
 
 ## What will be declined

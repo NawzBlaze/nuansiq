@@ -4,14 +4,14 @@ A portable agent skill for human-centered judgement: the part of the work that i
 
 Nuansiq is a **skill package for existing AI agents**, not a model, a chatbot, or an agent framework. It gives an agent a working method for understanding intent, choosing approaches deliberately, researching when facts matter, reviewing concretely, and revising before handing work over.
 
-**Status:** v0.1.0, pre-1.0, one skill, no license selected yet (see [License](#license)).
+**Status:** v0.1.0 preview, pre-1.0, one skill. The work is on the branch `arena/05108cd1-nuansiq`; the default branch `main` does not contain it yet. **No license has been selected** (see [License](#license)).
 
 ## What it is
 
-- A portable [Agent Skills](https://agentskills.io/specification) package: one `SKILL.md` plus three reference files the agent loads only when they are relevant.
-- A method, not a persona. It does not ask an agent to pretend to have feelings, taste memories, or a human voice.
-- Useful across writing, visual briefs and image prompts, research-backed recommendations, and practical advice.
-- Explicit about its own limits: it distinguishes verified facts from assumptions, treats retrieved text as data rather than instructions, and refuses to claim tools or memory it does not have.
+- A portable [Agent Skills](https://agentskills.io/specification) package: one `SKILL.md` plus three reference files, structured for hosts that load reference material on demand.
+- A method, not a persona. Nothing in it asks an agent to pretend to have feelings, taste memories, or a human voice.
+- Aimed at writing, visual briefs and image prompts, research-backed recommendations, and practical advice, with authored examples and eval briefs for each.
+- Its instructions require an agent to separate verified facts from assumptions, treat retrieved text as data rather than instructions, and avoid claiming tools or memory it does not have. This describes the text, not a tested runtime behaviour.
 
 ## What it does not do
 
@@ -30,6 +30,8 @@ Nuansiq is a **skill package for existing AI agents**, not a model, a chatbot, o
 
 ## What is in this repository
 
+On the branch `arena/05108cd1-nuansiq`:
+
 ```
 README.md
 CONTRIBUTING.md
@@ -42,84 +44,111 @@ skills/
       critique.md               # review, revision limits, handoff
 examples/                       # four illustrative cross-domain walkthroughs
 evals/                          # seven task briefs with criteria and failure modes
+  pilot.md                      # five-case pilot procedure (status: not run)
 scripts/validate.py             # repository self-check, standard library only
 .github/workflows/validate.yml  # runs the checks on pushes and pull requests
 ```
 
-## Installation
+## Installation status: preview branch, not on `main`
 
-The repository URL is not an installation. Cloning Nuansiq, or pasting the link into a chat, does nothing until the skill folder sits in a directory your host agent actually scans. There is no package on npm or PyPI, and no installer script; copying one folder is the whole installation.
+> **Preview, not a released install.** The repository's default branch is `main`, which still contains only the initial commit. The skill lives on the branch `arena/05108cd1-nuansiq` and has not been merged. A plain clone of the repository URL therefore retrieves **no skill at all** until the owner merges this work; the commands below fetch the branch explicitly.
 
-Start by getting the files:
+A repository URL is not an installation, and a merged default branch would not be one either. Nothing happens until the skill folder sits in a directory your host agent scans. There is no package on npm or PyPI and no installer script; copying one folder is the whole installation.
+
+### 1. Get the files
 
 ```bash
-git clone https://github.com/NawzBlaze/nuansiq.git
+git clone --branch arena/05108cd1-nuansiq https://github.com/NawzBlaze/nuansiq.git
+cd nuansiq
 ```
 
-Then use the section for your host. Commands below were checked against the hosts' own documentation in November 2026. Hosts change their conventions; if a path does not work, check that host's current skills documentation rather than adding flags until something loads.
+When this work is merged into `main` (owner decision, not done), drop `--branch arena/05108cd1-nuansiq`; the rest of these instructions do not change.
 
-### Claude Code
+### 2. Copy the skill into your host
 
-Personal, available in all your projects:
+Run these from the clone root. The paths are the ones each host's own documentation describes; see [Compatibility status](#compatibility-status) for what has and has not been tested.
+
+**Claude Code, personal (all your projects):**
 
 ```bash
 mkdir -p ~/.claude/skills
-cp -R nuansiq/skills/nuansiq ~/.claude/skills/
+cp -R skills/nuansiq ~/.claude/skills/
 ```
 
-Project-scoped, shared with everyone who clones the repository:
+**Claude Code, project-scoped (shared through the repository):**
 
 ```bash
-mkdir -p .claude/skills
-cp -R path/to/nuansiq/skills/nuansiq .claude/skills/
+mkdir -p /path/to/your/project/.claude/skills
+cp -R skills/nuansiq /path/to/your/project/.claude/skills/
 ```
 
-Start a session with `claude`, then invoke `/nuansiq`. Claude Code can also activate it from the description when a request matches.
-
-### Codex (CLI, IDE extension, ChatGPT desktop app)
-
-Personal:
+**Codex, personal:**
 
 ```bash
 mkdir -p ~/.agents/skills
-cp -R nuansiq/skills/nuansiq ~/.agents/skills/
+cp -R skills/nuansiq ~/.agents/skills/
 ```
 
-Repository-scoped, checked in with the project:
+**Codex, repository-scoped; also the path GitHub Copilot in VS Code uses:**
 
 ```bash
-mkdir -p .agents/skills
-cp -R path/to/nuansiq/skills/nuansiq .agents/skills/
+mkdir -p /path/to/your/project/.agents/skills
+cp -R skills/nuansiq /path/to/your/project/.agents/skills/
 ```
 
-Mention it with `$nuansiq`, or run `/skills` to see what loaded. Codex detects changes automatically; restart it if the skill does not appear.
-
-### GitHub Copilot in VS Code
-
-Put the skill in the project's `.agents/skills/` directory:
+### 3. Check what you got
 
 ```bash
-mkdir -p .agents/skills
-cp -R path/to/nuansiq/skills/nuansiq .agents/skills/
+find ~/.claude/skills/nuansiq -type f     # SKILL.md and references/*.md
 ```
 
-Open Copilot Chat in **Agent** mode, type `/skills` to confirm `nuansiq` is listed, then ask a matching question in natural language.
+You can validate the frontmatter with the reference library the specification points to. The PyPI package is called `skills-ref`; the command it installs is `agentskills`:
 
-### Other hosts
+```bash
+python3 -m venv .venv
+.venv/bin/pip install skills-ref
+.venv/bin/agentskills validate ~/.claude/skills/nuansiq
+```
 
-Nuansiq follows the [Agent Skills specification](https://agentskills.io/specification), so any host that implements it can load `skills/nuansiq/` if you place that folder in the location the host scans. Nuansiq has been tested for format validity, not for behaviour in every host. If you run it somewhere else, say so in an issue so the compatibility list can grow from evidence.
+A passing check means the folder is a well-formed skill. It does not mean your host loaded it.
 
-### Updating
+## Compatibility status
 
-Copy the folder again after pulling. A skill is a directory, so stale copies of `references/` will quietly disagree with `SKILL.md`; replacing the whole folder avoids that.
+Terms used here, and what each one actually covers:
+
+- **Format-valid** — the frontmatter passes `agentskills validate` from the reference library.
+- **Layout tested** — the files were copied to the path the host documents and re-validated there. No host process was involved.
+- **Activation tested** — the host discovered the skill and invoked it in a real session.
+- **Behaviour tested** — output was assessed against the criteria in [`evals/`](evals/README.md).
+
+| Host | Authoritative documentation used | Path documented by the host | Format-valid | Layout tested (2026-11-02) | Activation tested | Behaviour tested |
+| --- | --- | --- | --- | --- | --- | --- |
+| Claude Code | <https://code.claude.com/docs/en/skills> | `~/.claude/skills/<name>/`, `.claude/skills/<name>/` | yes | yes, both paths | **not tested** | **not tested** |
+| Codex (CLI, IDE extension, ChatGPT desktop) | <https://learn.chatgpt.com/docs/build-skills> | `~/.agents/skills/<name>/`, `.agents/skills/<name>/`, `/etc/codex/skills/` | yes | yes, user and repository paths | **not tested** | **not tested** |
+| GitHub Copilot in VS Code | <https://agentskills.io/skill-creation/quickstart> | `.agents/skills/<name>/` in the project | yes | yes, same path as Codex repository scope | **not tested** | **not tested** |
+| Any other specification-compliant host | <https://agentskills.io/specification> | host-defined | yes | **not tested** | **not tested** | **not tested** |
+
+Copying files and validating a `SKILL.md` is **not** evidence of runtime compatibility. Nuansiq has no measured activation or behaviour results in any host; see [`evals/pilot.md`](evals/pilot.md) for the procedure and its current status.
+
+### Updating a preview install
+
+```bash
+cd nuansiq
+git pull
+cp -R skills/nuansiq ~/.claude/skills/     # or your host's path
+```
+
+Replace the whole folder rather than individual files. A skill is a directory, so a stale `references/` copy will quietly disagree with `SKILL.md`.
 
 ## How to invoke it
 
-- **Claude Code:** `/nuansiq`, or ask normally and let the description trigger it.
-- **Codex:** `$nuansiq`, or let it be selected.
-- **VS Code Copilot:** ask a matching question in Agent mode; use `/skills` to check it is installed.
+These are the invocation routes the hosts document. **None has been tested in a live session** (see [Compatibility status](#compatibility-status)).
 
-If you want Nuansiq's method applied to a specific request, say so: "Use Nuansiq to review this paragraph for a skeptical CFO." Explicit invocation is more reliable than hoping a description matched.
+- **Claude Code:** `/nuansiq`, or a request that matches the description.
+- **Codex:** `$nuansiq`, or `/skills` to list what loaded.
+- **VS Code Copilot:** ask a matching question in Agent mode; `/skills` lists installed skills.
+
+Direct invocation does not depend on the description matching, so it is the predictable route. If you want the method applied to a specific request, name it: "Use Nuansiq to review this paragraph for a skeptical CFO."
 
 ## If your environment has no skill support: a limited fallback
 
@@ -151,12 +180,12 @@ For the fuller version, paste the body of [`skills/nuansiq/SKILL.md`](skills/nua
 
 ## When browsing, image tools, or memory are unavailable
 
-Nuansiq is written to degrade honestly rather than to pretend.
+The following is what the skill *instructs* an agent to do. It is not a record of observed behaviour; no host sessions have been run (see [`evals/pilot.md`](evals/pilot.md)).
 
-- **No browsing:** the agent says so, separates what it knows from what it assumes, and names what would change if the fact were checked. It does not produce a citation-shaped guess.
-- **No image inspection:** the agent can review an image *prompt* or a written brief, but it will not claim to have looked at a generated image, a screenshot, or a design file. Reviewing a prompt is different from reviewing the output.
-- **No memory:** preferences apply to the current conversation only. Nothing is stored, and nothing is claimed about past sessions.
-- **Hosts without file access:** no read, no write, no persistence. The skill still works as a method.
+- **No browsing:** the agent is told to say so, separates what it knows from what it assumes, and names what would change if the fact were checked. It does not produce a citation-shaped guess.
+- **No image inspection:** the agent is told it may review an image *prompt* or a written brief, but must not claim to have looked at a generated image, a screenshot, or a design file. Reviewing a prompt is different from reviewing the output.
+- **No memory:** preferences apply to the current conversation only. Nothing is stored by the skill, and nothing is claimed about past sessions.
+- **Hosts without file access:** no read, no write, no persistence; the skill is instructions only.
 
 The full protocol is in [`skills/nuansiq/references/research.md`](skills/nuansiq/references/research.md).
 
@@ -175,12 +204,12 @@ Details and a preference-file template: [`skills/nuansiq/references/judgement.md
 
 [`evals/`](evals/README.md) contains seven task briefs with task-specific criteria, covering a simple request that must not be overcomplicated, a creative task where audience matters, a task that needs research, a subjective task with several valid tastes, a conflict between a user's preference and the agent's recommendation, a missing-tool case, and a retrieved-content prompt-injection case.
 
-The eval set is a protocol, not a result. No measured comparison is published in this repository, and none is claimed. The [examples](examples/README.md) are hand-written illustrations of the method; they are labelled as illustrative and are not evidence of improved output.
+The eval set is a protocol, not a result. No measured comparison is published in this repository, and none is claimed. [`evals/pilot.md`](evals/pilot.md) holds a five-case baseline-versus-Nuansiq procedure; its status is **not run**, because no skill-capable host, model credentials, or model API access were available in the environment where this repository was prepared. The [examples](examples/README.md) are hand-written illustrations of the method, authored without running an agent, and are not evidence of improved output.
 
 ## Known limitations
 
 - **Judgement, not verification.** Nuansiq cannot make an agent's facts correct. It changes how the agent handles uncertainty, not what it knows.
-- **Description-based activation is imperfect.** A skill can fail to activate when it should, or activate when it should not. The description is written to reduce the second failure; explicit invocation is the reliable route.
+- **Activation is untested.** Descriptions can fail to match when they should, or match when they should not. The wording here is designed to reduce the second failure, but that design is unmeasured; direct invocation is the predictable route.
 - **Taste is contested.** Where two directions are equally defensible, Nuansiq aims to make the choice explicit and reversible, not to settle it.
 - **No measured outcomes.** The eval briefs are small, and scoring them requires a human or a careful grader. Treat any future scores as indicative, not statistically meaningful.
 - **Host behaviour varies.** Skill support, tool availability, and invocation syntax differ between products and versions.

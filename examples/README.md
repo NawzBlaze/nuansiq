@@ -4,7 +4,12 @@ Four walkthroughs of Nuansiq in use: writing, a visual brief, a research-backed 
 
 ## What these are, and what they are not
 
-These are **illustrative**: hand-written to show the shape of a Nuansiq-shaped answer next to a common generic one. They are not measured outputs from a particular model, they are not before-and-after evidence of improvement, and the "weak" answers are composite examples of familiar failure patterns rather than transcripts from any specific product.
+These are **illustrative**.
+
+- **No agent was run to produce them.** Every response below was written by hand by the project author, including the ones labelled "Nuansiq-shaped".
+- They are **not transcripts**, not model outputs, and not evidence that an installed skill produces anything like them.
+- The "weak" answers are authored composites of common failure patterns, not quotes from a specific product.
+- They are not before-and-after measurements, and no score accompanies them.
 
 The point is the reasoning you can see in each comparison: what was read from the brief, which criteria were chosen, which tradeoff was accepted, and what was deliberately not claimed.
 

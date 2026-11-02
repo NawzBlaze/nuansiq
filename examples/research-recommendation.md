@@ -1,6 +1,6 @@
 # Recommendation: MIT or Apache-2.0 for a library that wants corporate users
 
-*Illustrative example, hand-written to show the method. Not a measured result. Nothing here is legal advice; license questions belong with counsel.*
+*Illustrative and hand-written: no agent was run to produce the "Nuansiq-shaped" text below, so it is not a transcript or a measured result. Nothing here is legal advice; license questions belong with counsel.*
 
 ## The brief
 

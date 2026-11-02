@@ -1,6 +1,6 @@
 # Writing: a product description for a very small company
 
-*Illustrative example, hand-written to show the method. Not a measured result.*
+*Illustrative and hand-written: no agent was run to produce the "Nuansiq-shaped" text below, so it is not a transcript or a measured result.*
 
 ## The brief
 
