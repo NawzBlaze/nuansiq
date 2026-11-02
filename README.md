@@ -2,7 +2,7 @@
 
 Nuansiq gives an existing AI agent a working method for human-centered judgement: clarify the job and its audience, choose an approach deliberately, research when facts could change the answer, and critique concrete problems before handing work over.
 
-**Preview status.** v0.1.0, one skill. This work is on the branch `arena/05108cd1-nuansiq`; the default branch `main` does not contain it, and there is no release. Licensed MIT (see [License](#license)). No model or product is listed as supported; see the [capability matrix](#capability-matrix).
+**Public preview — behavioural evaluation pending.** One skill, MIT licensed (see [License](#license)). Published means the implementation and documentation are on the default branch; it does not mean a hosted service, automatic installation into any tool, or demonstrated improvement in model behaviour. No model or product is listed as supported; see the [capability matrix](#capability-matrix).
 
 **Use it three ways.** As a [native Agent Skill](#installing-as-a-native-skill-host-specific), as a [manual instruction file](#manual-instruction-fallback-no-native-skills) for hosts without skill support, or as [programmatic context](#developer-integration-programmatic-context) in your own app. The behavioural guidance is the same in all three; only the delivery differs.
 
@@ -53,7 +53,7 @@ They differ in delivery, not in content. Native skills can load reference materi
 
 ## What is in this repository
 
-On the branch `arena/05108cd1-nuansiq`:
+In the default branch (`main`):
 
 ```
 README.md
@@ -87,18 +87,18 @@ The standalone file is a build artefact, not a second specification. `scripts/va
 
 Everything host-specific lives in this section. The skill package itself contains no host names, no slash-command syntax, and no tool names; a check in `scripts/validate.py` enforces that.
 
-> **Preview, not a released install.** The repository's default branch is `main`, which still contains only the initial commit. The skill lives on the branch `arena/05108cd1-nuansiq` and has not been merged. A plain clone of the repository URL therefore retrieves **no skill at all** until the owner merges this work; the commands below fetch the branch explicitly.
+> **Installation is not activation.** These steps place files where each host documents. They do not make any host load the skill, and this repository has no runtime of its own. Activation and task behaviour are untested; see the [capability matrix](#capability-matrix).
 
 There is no package on npm or PyPI and no installer script; copying one folder is the whole installation.
 
 ### 1. Get the files
 
 ```bash
-git clone --branch arena/05108cd1-nuansiq https://github.com/NawzBlaze/nuansiq.git
+git clone https://github.com/NawzBlaze/nuansiq.git
 cd nuansiq
 ```
 
-When this work is merged into `main` (owner decision, not done), drop `--branch arena/05108cd1-nuansiq`; the rest of these instructions do not change.
+A repository URL on its own installs nothing: the folder has to be copied into a path the host scans, and no host is known to discover it automatically without that step.
 
 ### 2. Copy the skill into your host
 
@@ -171,6 +171,8 @@ Replace the whole folder rather than individual files. A skill is a directory, s
 ## Manual instruction fallback (no native skills)
 
 [`standalone/nuansiq-manual.md`](standalone/nuansiq-manual.md) is a self-contained document: core method, plus judgement, research, and critique appendices, with no links to other repository files. It is generated from the skill sources, so the guidance cannot drift from the skill's.
+
+Raw copy, no clone needed: <https://raw.githubusercontent.com/NawzBlaze/nuansiq/main/standalone/nuansiq-manual.md>
 
 **This is a manual fallback, not an installation, and not equivalent to one.**
 

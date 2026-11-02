@@ -21,7 +21,7 @@ Host documentation used: <https://code.claude.com/docs/en/skills>. That page doc
 ## Step 1 — Installation
 
 ```bash
-git clone --branch arena/05108cd1-nuansiq https://github.com/NawzBlaze/nuansiq.git
+git clone https://github.com/NawzBlaze/nuansiq.git
 cd nuansiq
 mkdir -p ~/.claude/skills
 cp -R skills/nuansiq ~/.claude/skills/
